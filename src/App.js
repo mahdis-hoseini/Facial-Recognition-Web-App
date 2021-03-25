@@ -1,28 +1,27 @@
-import React from 'react';
-import styled from 'styled-components';
-import './styles/index.css';
-import bot from './assistant.png';
+import React, { Component } from 'react';
+import { Route, Router } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
+import FaceRecognition from './views/faceRecognition';
+import CameraFaceDetect from './views/cameraFaceDetect';
+import Home from './views/Home';
+import Header from './components/Header';
+import './App.css';
 
-
-const Wrapper = styled.div`
-		background: #404040;
-		margin:0 auto;
-		padding: 20px;
-		border-radius: 12px;
-		box-shadow: 0 0 9px 6px #c0b7b7;
-		text-align: center;
-		
-`
-
-function App() {
-	return (
-			<Wrapper>
-				<img src={bot} alt="Pluralsight Bot"/>
-				<h1 style={{margin:'0'}}>It worked</h1>
-				<p>The App Was Deployed Successfully!</p>
-
-			</Wrapper>
-	);
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Router history={createHistory({ basename: process.env.PUBLIC_URL })}>
+          <div className="route">
+            <Header />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/photo" component={FaceRecognition} />
+            <Route exact path="/camera" component={CameraFaceDetect} />
+          </div>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
